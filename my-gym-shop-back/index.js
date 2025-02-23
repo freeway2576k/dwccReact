@@ -1,18 +1,25 @@
-const express = require('express');
-const cors = require('cors'); //para permitir quien diabloh se conecta
+import express from 'express';
+import cors from 'cors'; //para permitir quien diabloh se conecta
 const app = express(); // pa crear el servidor de la mas alta CALIDAAH
-const mongoose = require('mongoose'); //para la conexion a la bbdd
-const multer = require('multer'); // para la subida de archivos
+import mongoose from 'mongoose'; //para la conexion a la bbdd
+import multer from 'multer'; // para la subida de archivos
 
 const PORT = 5000;
-
+// ----------------------- lo del cors -------------------------------//
 app.use(cors({
     origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE'], 
     allowedHeaders: ['Content-Type', 'Authorization'], 
   }));
+//--------------------------------------------------------------------//
 
+//-------------------- las rutas y eso -------------------------------//
+app.use('/Ankalagon/usuarios', )
+//--------------------------------------------------------------------//
 
+// ----------------------- lo del multer -------------------------------//
+
+//--------------------------------------------------------------------//
 app.get('/', (req, res) => {
   res.json({ mensaje: 'Hola desde Express' });
 });

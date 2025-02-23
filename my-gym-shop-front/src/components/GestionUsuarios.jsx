@@ -1,6 +1,30 @@
-import React from "react";
+import { useState } from 'react';
 import './../css/GestionUsuarios.css'
 export const GestionUsuarios = () => {
+    //------------------Donde se guardan los clientes ------------------//
+    const [usuario, setUsuario] = useState({
+        _id: '',
+        nombre: '',
+        email: '',
+        telefono: '',
+        rol: '',
+    });
+    const [usuarios, setUsuarios] = useState([]);
+    //-----------------------------------------------------------------//
+    //------------------ Funciones --------------------------------------//
+    const manejarCambiosInput = (e) => {
+        const { name, value} = e.target;
+        setUsuario(prevUsuario => ({
+             ...prevUsuario,
+              [name]: value,
+            }));
+    };
+
+    const almacenarUsuario = async () => {
+        
+    }
+    //-----------------------------------------------------------------//
+
     return (
         <main className="d-flex flex-column py-5">
           <section className="container">
@@ -13,20 +37,20 @@ export const GestionUsuarios = () => {
               <form>
                 <div className="row g-3">
                   <div className="col-md-6">
-                    <label htmlFor="name" className="form-label">Nombre</label>
-                    <input type="text" className="form-control" id="name" placeholder="Ej. Juan Pérez" />
+                    <label htmlFor="name" className="form-label">Empresa</label>
+                    <input type="text" className="form-control" id="name" name='nombre' value={usuario.nombre} onChange={manejarCambiosInput} placeholder="Ej. Gym Shop" />
                   </div>
                   <div className="col-md-6">
                     <label htmlFor="email" className="form-label">Email</label>
-                    <input type="email" className="form-control" id="email" placeholder="Ej. juan@gym.com" />
+                    <input type="email" className="form-control" id="email" name='email' value={usuario.email} onChange={manejarCambiosInput} placeholder="Ej. gym@shop.com" />
                   </div>
                   <div className="col-md-6">
                     <label htmlFor="phone" className="form-label">Teléfono</label>
-                    <input type="tel" className="form-control" id="phone" placeholder="Ej. +123 456 7890" />
+                    <input type="tel" className="form-control" id="phone" name='telefono' value={usuario.telefono} onChange={manejarCambiosInput} placeholder="Ej. 900 456 789" />
                   </div>
                   <div className="col-md-6">
                     <label htmlFor="role" className="form-label">Rol</label>
-                    <select className="form-select" id="role">
+                    <select className="form-select" id="role" name='rol' value={usuario.rol} onChange={manejarCambiosInput}>
                       <option value="">Selecciona un rol</option>
                       <option value="admin">Administrador</option>
                       <option value="client">Cliente</option>
@@ -46,7 +70,8 @@ export const GestionUsuarios = () => {
                 <table className="table table-striped table-hover">
                   <thead className="table-dark">
                     <tr>
-                      <th scope="col">Nombre</th>
+                      <th scope="col">id</th>
+                      <th scope="col">Empresa</th>
                       <th scope="col">Email</th>
                       <th scope="col">Teléfono</th>
                       <th scope="col">Rol</th>
