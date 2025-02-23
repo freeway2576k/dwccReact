@@ -1,24 +1,19 @@
-import './App.css'
-import { Inicio } from './components/Inicio'
 import { NavBar } from './components/NavBar'
 import {BrowserRouter as Router, Routes, Route}  from 'react-router-dom'
 import { Footer } from './components/Footer'
+import AppRoutes from './router/routes'
 
 function App() {
 
   return (
-    <body>
+    <div>
       <Router>
         <NavBar />
-        <Routes>
-          <Route path='/' element={<Inicio />} />
-          <Route path='/' element={<Inicio />} />
-          <Route path='/' element={<Inicio />} />
-        </Routes>
+        <AppRoutes />
         <Footer />
       </Router>
 
-    </body>
+    </div>
   )
 }
 
