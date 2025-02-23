@@ -1,0 +1,48 @@
+.footer {
+    background-color: #ff6200;
+    color: #fff;
+    padding: 3rem 0;
+    margin-top: auto; /* Para que se quede abajo si hay poco contenido */
+}
+
+.footer a {
+    color: #ffe5cc;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.footer h5 {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #fff;
+}
+
+.footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer ul li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-social i {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.footer-social i:hover {
+    transform: scale(1.2);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+}
