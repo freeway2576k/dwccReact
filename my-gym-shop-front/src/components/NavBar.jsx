@@ -16,19 +16,19 @@ export const NavBar = () => {
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Inicio</a>
+                        <Link to={'/'}><a class="nav-link">Inicio</a></Link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sobre Nosotros</a>
+                        <Link to={'/sobre-nosotros'}><a class="nav-link">Sobre Nosotros</a></Link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Tienda</a>
+                        <Link to={'/tienda'}><a class="nav-link">Tienda</a></Link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contacto</a>
+                        <Link to={'/contacto'}><a class="nav-link">Contacto</a></Link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">FAQ</a>
+                        <Link to={'/faq'}><a class="nav-link">FAQ</a></Link>
                     </li>
                 </ul>
             </div>
