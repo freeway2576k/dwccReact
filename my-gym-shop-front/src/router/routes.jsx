@@ -6,6 +6,7 @@ import { Contacto } from '../components/Contacto';
 import { SobreNosotros } from '../components/SobreNosotros';
 import { TerminosCondiciones } from '../components/TerminosCondiciones';
 import { NotFound } from '../components/NotFound';
+import { GestionUsuarios } from '../components/GestionUsuarios';
 
 
 const AppRoutes = () => {
@@ -18,6 +19,7 @@ const AppRoutes = () => {
             <Route path='/sobre-nosotros' element={<SobreNosotros />} />
             <Route path='/terminos-y-condiciones' element={<TerminosCondiciones />} />
             <Route path='*' element={<NotFound />} />
+            <Route path='/gestion-usuarios' element={<GestionUsuarios />} />
         </Routes>
     );
 };
