@@ -7,7 +7,7 @@ export const Footer = () => {
             <div class="row">
                 <div class="col-md-4 col-sm-6 mb-4">
                     <h5>Sobre Nosotros</h5>
-                    <p>Somos una empresa dedicada a ofrecer las mejores soluciones para nuestros clientes con pasión y compromiso.</p>
+                    <p>Construimos el futuro del fitness profesional con equipos de primera calidad para gimnasios.</p>
                 </div>
 
                 <div class="col-md-2 col-sm-6 mb-4">
@@ -41,7 +41,7 @@ export const Footer = () => {
             </div>
 
             <div class="footer-bottom text-center">
-                <p class="mb-0">&copy; 2025 MiMarca. Todos los derechos reservados.</p>
+                <p class="mb-0">&copy; 2025 The Gym Shop. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>

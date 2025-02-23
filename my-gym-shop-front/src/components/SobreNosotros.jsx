@@ -16,7 +16,7 @@ export const SobreNosotros = () => {
           <div className="row g-4 align-items-center">
             <div className="col-md-6">
               <p className="lead">
-                En GymForce, nos dedicamos a proporcionar a los gimnasios las herramientas más avanzadas y duraderas del mercado. Nuestro objetivo es potenciar el éxito de tu negocio con equipos que combinan innovación, resistencia y diseño.
+                En The Gym Shop, nos dedicamos a proporcionar a los gimnasios las herramientas más avanzadas y duraderas del mercado. Nuestro objetivo es potenciar el éxito de tu negocio con equipos que combinan innovación, resistencia y diseño.
               </p>
               <a href="#contacto" className="btn btn-naranja mt-3">Contáctanos</a>
             </div>
