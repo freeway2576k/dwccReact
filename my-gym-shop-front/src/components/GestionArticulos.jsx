@@ -1,9 +1,135 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import './../css/GestionArticulos.css'
-import { useAuthStore } from '../store/authStore';
+import  useAuthStore  from '../store/authStore';
 
 export const GestionArticulos = () => {
   const token = useAuthStore.getState().token;
+  //---------------------Donde se guarda el articulo-----------------------------//
+  const [articulo, setArticulo] = useState({
+    nombre: "",
+    categoria: "",
+    precio: "",
+    stock: "",
+    marca: "",
+    peso: "",
+    dimensiones: "",
+    estado: "",
+    descripcion: "",
+  });
+  const [articulos, setArticulos] = useState([]);
+  //-----------------------------------------------------------------------------//
+
+  //--------------------- para que actualice el objeto articulo -----------------//
+  const manejarCambiosInput = (e) => {
+    const { name, value } = e.target;
+    setArticulo((prevArticulo) => ({
+      ...prevArticulo,
+      [name]: value,
+    }));
+    console.log(articulo);
+  };
+  //-----------------------------------------------------------------------------//
+  //--------------------- para guardar articulo --------------------------------//
+  const almacenarArticulo = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:5000/atlas/articulos/", {
+        method: "POST",
+        headers: {
+          "Authorization": token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(articulo),
+      });
+      if (response.ok) {
+        console.log("Articulo guardado correctamente");
+        obtenerArticulos();
+      } else {
+        console.log("Error al guardar articulo");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //-----------------------------------------------------------------------------//
+  //--------------------- para modificar articulo ------------------------------//
+  const modificarArticulo = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:5000/atlas/articulos/" + articulo._id, {
+        method: "PUT",
+        headers: {
+          "Authorization": token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(articulo),
+      });
+      if (response.ok) {
+        console.log("Articulo modificado correctamente");
+        obtenerArticulos();
+      } else {
+        console.log("Error al modificar articulo");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //-----------------------------------------------------------------------------//
+  //--------------------- para eliminar articulo -------------------------------//
+  const eliminarArticulo = async (id) => {
+    try {
+      const response = await fetch("http://localhost:5000/atlas/articulos/" + id, {
+        method: "DELETE",
+        headers: {
+          "Authorization": token,
+        }
+      });
+      if (response.ok) {
+        console.log("Articulo eliminado correctamente");
+        obtenerArticulos();
+      } else {
+        console.log("Error al eliminar articulo");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //-----------------------------------------------------------------------------//
+
+  //--------------------- para obtener articulos --------------------------------//
+  const obtenerArticulos = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/atlas/articulos/", {
+        method: "GET",
+        headers: {
+          "Authorization": token,
+          "Content-Type": "application/json",
+        }
+      });
+      if (response.ok) {
+        const articulos = await response.json();
+        setArticulos(articulos);
+      } else {
+        console.log("Error al obtener articulos");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //-----------------------------------------------------------------------------//
+
+  useEffect(() => {
+    obtenerArticulos();
+  }, []);
+
+  //-----------------------------------------------------------------------------//
+  //--------------------- seleccionar articulo ---------------------------------//
+    const seleccionarArticulo = (id) => {
+        const articuloSeleccionado = articulos.find(articulo => articulo._id === id);
+        setArticulo(articuloSeleccionado);
+    };
+  //-----------------------------------------------------------------------------//
+
   return (
     <main className="d-flex flex-column py-5">
     <section className="container">
@@ -22,16 +148,19 @@ export const GestionArticulos = () => {
                 type="text"
                 className="form-control"
                 id="name"
+                name="nombre"
+                value={articulo.nombre}
+                onChange={manejarCambiosInput}
                 placeholder="Ej. Máquina de Pesas"
               />
             </div>
             <div className="col-md-6">
               <label htmlFor="category" className="form-label">Categoría</label>
-              <select className="form-select" id="category">
+              <select className="form-select" id="category" name="categoria" value={articulo.categoria} onChange={manejarCambiosInput}>
                 <option value="">Selecciona una categoría</option>
-                <option value="cardio">Cardio</option>
-                <option value="musculacion">Musculación</option>
-                <option value="accesorios">Accesorios</option>
+                <option value="CARDIO">Cardio</option>
+                <option value="MUSCULACION">Musculación</option>
+                <option value="ACCESORIOS">Accesorios</option>
               </select>
             </div>
             <div className="col-md-6">
@@ -40,6 +169,9 @@ export const GestionArticulos = () => {
                 type="number"
                 className="form-control"
                 id="price"
+                name="precio"
+                value={articulo.precio}
+                onChange={manejarCambiosInput}
                 placeholder="Ej. 1500"
               />
             </div>
@@ -49,6 +181,9 @@ export const GestionArticulos = () => {
                 type="number"
                 className="form-control"
                 id="stock"
+                name="stock"
+                value={articulo.stock}
+                onChange={manejarCambiosInput}
                 placeholder="Ej. 10"
               />
             </div>
@@ -58,6 +193,9 @@ export const GestionArticulos = () => {
                 type="text"
                 className="form-control"
                 id="brand"
+                name="marca"
+                value={articulo.marca}
+                onChange={manejarCambiosInput}
                 placeholder="Ej. Life Fitness"
               />
             </div>
@@ -67,6 +205,9 @@ export const GestionArticulos = () => {
                 type="number"
                 className="form-control"
                 id="weight"
+                name="peso"
+                value={articulo.peso}
+                onChange={manejarCambiosInput}
                 placeholder="Ej. 120"
               />
             </div>
@@ -76,15 +217,18 @@ export const GestionArticulos = () => {
                 type="text"
                 className="form-control"
                 id="dimensions"
+                name="dimensiones"
+                value={articulo.dimensiones}
+                onChange={manejarCambiosInput}
                 placeholder="Ej. 150x80x120"
               />
             </div>
             <div className="col-md-6">
               <label htmlFor="condition" className="form-label">Estado</label>
-              <select className="form-select" id="condition">
+              <select className="form-select" id="condition" name="estado" value={articulo.estado} onChange={manejarCambiosInput}>
                 <option value="">Selecciona un estado</option>
-                <option value="new">Nuevo</option>
-                <option value="used">Usado</option>
+                <option value="NUEVO">Nuevo</option>
+                <option value="USADO">Usado</option>
               </select>
             </div>
             <div className="col-12">
@@ -93,13 +237,16 @@ export const GestionArticulos = () => {
                 className="form-control"
                 id="description"
                 rows="3"
+                name="descripcion"
+                value={articulo.descripcion}
+                onChange={manejarCambiosInput}
                 placeholder="Ej. Máquina de musculación multifuncional con capacidad de 200kg"
               ></textarea>
             </div>
           </div>
           <div className="d-flex gap-3 mt-4">
-            <button type="submit" className="btn btn-naranja">Guardar</button>
-            <button type="button" className="btn btn-outline-dark">Modificar</button>
+            <button type="submit" className="btn btn-naranja" onClick={almacenarArticulo}>Guardar</button>
+            <button type="button" className="btn btn-outline-dark" onClick={modificarArticulo}>Modificar</button>
           </div>
         </form>
       </div>
@@ -110,6 +257,7 @@ export const GestionArticulos = () => {
           <table className="table table-striped table-hover">
             <thead className="table-dark">
               <tr>
+                <th scope="col">id</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Categoría</th>
                 <th scope="col">Precio</th>
@@ -122,48 +270,31 @@ export const GestionArticulos = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Máquina de Pesas</td>
-                <td>Musculación</td>
-                <td>$1500</td>
-                <td>10</td>
-                <td>Life Fitness</td>
-                <td>120kg</td>
-                <td>150x80x120</td>
-                <td>Nuevo</td>
-                <td>
-                  <button className="btn btn-naranja btn-sm me-2">Editar</button>
-                  <button className="btn btn-outline-danger btn-sm">Eliminar</button>
-                </td>
-              </tr>
-              <tr>
-                <td>Cinta de Correr</td>
-                <td>Cardio</td>
-                <td>$2000</td>
-                <td>5</td>
-                <td>Technogym</td>
-                <td>80kg</td>
-                <td>180x70x140</td>
-                <td>Usado</td>
-                <td>
-                  <button className="btn btn-naranja btn-sm me-2">Editar</button>
-                  <button className="btn btn-outline-danger btn-sm">Eliminar</button>
-                </td>
-              </tr>
-              <tr>
-                <td>Pesas de 10kg</td>
-                <td>Accesorios</td>
-                <td>$50</td>
-                <td>20</td>
-                <td>Rogue</td>
-                <td>10kg</td>
-                <td>30x20x10</td>
-                <td>Nuevo</td>
-                <td>
-                  <button className="btn btn-naranja btn-sm me-2">Editar</button>
-                  <button className="btn btn-outline-danger btn-sm">Eliminar</button>
-                </td>
-              </tr>
+              {articulos.map((articulo, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{articulo._id}</td>
+                    <td>{articulo.nombre}</td>
+                    <td>{articulo.categoria}</td>
+                    <td>{articulo.precio}</td>
+                    <td>{articulo.stock}</td>
+                    <td>{articulo.marca}</td>
+                    <td>{articulo.peso}</td>
+                    <td>{articulo.dimensiones}</td>
+                    <td>{articulo.estado}</td>
+                    <td>
+                      <div className="d-flex gap-2">
+                        <button className="btn btn-naranja btn-sm me-2" onClick={() => seleccionarArticulo(articulo._id)}>
+                          Editar
+                        </button>
+                        <button className="btn btn-outline-danger btn-sm" onClick={() => eliminarArticulo(articulo._id)}>
+                          Eliminar
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
