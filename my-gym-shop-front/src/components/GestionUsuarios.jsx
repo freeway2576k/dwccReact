@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import "./../css/GestionUsuarios.css";
+import useAuthStore from '../store/authStore';
+
+
 export const GestionUsuarios = () => {
+  const token = useAuthStore.getState().token;
   //------------------Donde se guardan los clientes ------------------//
   const [usuario, setUsuario] = useState({
     nombre: "",
@@ -29,6 +33,7 @@ export const GestionUsuarios = () => {
       const response = await fetch("http://localhost:5000/atlas/usuarios/", {
         method: "POST",
         headers: {
+          "Authorization": token,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(usuario),
@@ -51,6 +56,10 @@ export const GestionUsuarios = () => {
     try {
       const response = await fetch("http://localhost:5000/atlas/usuarios/", {
         method: "GET",
+        headers: {
+          "Authorization": token,
+          "Content-Type": "application/json",
+        }
       });
       if (response.ok) {
         const usuarios = await response.json();
@@ -82,6 +91,7 @@ export const GestionUsuarios = () => {
         const response = await fetch("http://localhost:5000/atlas/usuarios/" + usuario._id, {
           method: "PUT",
           headers: {
+            "Authorization": token,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(usuario),
@@ -103,6 +113,9 @@ export const GestionUsuarios = () => {
     try {
       const response = await fetch("http://localhost:5000/atlas/usuarios/" + id, {
         method: "DELETE",
+        headers: {
+          "Authorization": token,
+        }
       });
       if (response.ok) {
         console.log("Usuario eliminado correctamente");

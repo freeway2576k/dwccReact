@@ -8,7 +8,7 @@ import rutasAuth from './routes/authentication.js';
 import dotenv from 'dotenv'; //pa que no te hackiee las pass y las keys
 dotenv.config();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 app.use(express.json()); //pa q pueda manejar json en el body
 // ----------------------- lo del cors -------------------------------//
 app.use(cors({
@@ -36,4 +36,5 @@ mongoose.connect(process.env.MONGODB_URI)
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  console.log("jwt secreto", process.env.JWT_SECRET);
 });

@@ -1,8 +1,16 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import "./../css/navbar.css";
+import useAuthStore from '../store/authStore';
+import { Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const NavBar = () => {
+    const { cerrarSesion } = useAuthStore();
+    const hacerLogout =  (e) => {
+        e.preventDefault();
+        cerrarSesion();
+        Navigate('/');
+    }
+
     return (
         <nav className="navbar navbar-expand-lg">
             <div className="container-fluid">
@@ -87,9 +95,9 @@ export const NavBar = () => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/" className="dropdown-item">
+                                    <button className="dropdown-item" onClick={hacerLogout}>
                                         Logout
-                                    </Link>
+                                    </button>
                                 </li>
                             </ul>
                         </li>
@@ -98,4 +106,4 @@ export const NavBar = () => {
             </div>
         </nav>
     );
-};
+}
