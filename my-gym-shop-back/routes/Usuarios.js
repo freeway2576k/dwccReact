@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-const { Usuario } = require('../model/Usuario.js');
+import Usuario from '../model/Usuario.js';
 
 //--------------------Almacenar Usuario -------------------------------//
 router.post( '/', async(req, res) =>{
@@ -52,3 +52,5 @@ router.delete('/:id', async(req, res) => {
     }
 })
 //--------------------------------------------------------------------//
+
+export default router;
