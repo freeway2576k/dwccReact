@@ -1,9 +1,10 @@
 import express from 'express';
 const router = express.Router();
 import Usuario from '../model/Usuario.js';
+import authMiddleware from '../middleware/authMiddleware.js'; //pa proteger las rutas, llamarlo entre la ruta y el metodo
 
 //--------------------Almacenar Usuario -------------------------------//
-router.post( '/', async(req, res) =>{
+router.post( '/',authMiddleware, async(req, res) =>{
     try{
         const nuevoUsuario = new Usuario(req.body);
         await nuevoUsuario.save();
@@ -16,7 +17,7 @@ router.post( '/', async(req, res) =>{
 //--------------------------------------------------------------------//
 
 //--------------------Obtener Usuarios ----------------------------------//
-router.get('/', async(req,res) => {
+router.get('/',authMiddleware, async(req,res) => {
     try{
         const usuarios = await Usuario.find();
         res.json(usuarios);
@@ -28,7 +29,7 @@ router.get('/', async(req,res) => {
 //--------------------------------------------------------------------//
 
 //--------------------Modificar Usuario ---------------------------------//
-router.put('/:id', async(req, res) =>{
+router.put('/:id',authMiddleware, async(req, res) =>{
     try{
         const usuarioModificado = await Usuario.findByIdAndUpdate(req.params.id, req.body, {new: true});
         if(!usuarioModificado) return res.status(404).json({mensaje: "Usuario no encontrado"});
@@ -41,7 +42,7 @@ router.put('/:id', async(req, res) =>{
 //--------------------------------------------------------------------//
 
 //--------------------Eliminar Usuario ---------------------------------//
-router.delete('/:id', async(req, res) => {
+router.delete('/:id',authMiddleware, async(req, res) => {
     try{
         const usuarioEliminado = await Usuario.findByIdAndDelete(req.params.id);
         if(!usuarioEliminado) return res.status(404).json({mensaje: "Usuario no encontrado"});
