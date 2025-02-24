@@ -181,8 +181,8 @@ export const GestionUsuarios = () => {
                   onChange={manejarCambiosInput}
                 >
                   <option value="">Selecciona un rol</option>
-                  <option value="admin">Administrador</option>
-                  <option value="client">Cliente</option>
+                  <option value="ADMIN">Administrador</option>
+                  <option value="USER">Cliente</option>
                 </select>
               </div>
             </div>

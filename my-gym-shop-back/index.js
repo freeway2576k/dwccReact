@@ -4,6 +4,7 @@ const app = express(); // pa crear el servidor de la mas alta CALIDAAH
 import mongoose from 'mongoose'; //para la conexion a la bbdd
 //import multer from 'multer'; // para la subida de archivos
 import rutasUsuarios from './routes/Usuarios.js';
+import rutasAuth from './routes/authentication.js';
 import dotenv from 'dotenv'; //pa que no te hackiee las pass y las keys
 dotenv.config();
 
@@ -18,7 +19,8 @@ app.use(cors({
 //--------------------------------------------------------------------//
 
 //-------------------- las rutas y eso -------------------------------//
-app.use('/atlas/usuarios', rutasUsuarios)
+app.use('/atlas/usuarios', rutasUsuarios);
+app.use('/atlas/auth', rutasAuth);
 //--------------------------------------------------------------------//
 
 // ----------------------- lo del multer -------------------------------//
