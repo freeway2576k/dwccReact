@@ -8,6 +8,7 @@ import { SobreNosotros } from '../components/SobreNosotros';
 import { TerminosCondiciones } from '../components/TerminosCondiciones';
 import { NotFound } from '../components/NotFound';
 import { GestionUsuarios } from '../components/GestionUsuarios';
+import { GestionArticulos } from '../components/GestionArticulos';
 import { Login } from '../components/Login';
 import { Registro } from '../components/Registro';
 import { NoAutorizado } from '../components/NoAutorizado';
@@ -32,6 +33,9 @@ const AppRoutes = () => {
 
             {/* Rutas pa los admins */}
             <Route path='/gestion-usuarios'element={<RutaProtegidaPorRol rolesPermitidos={['ADMIN']}><GestionUsuarios /></RutaProtegidaPorRol>
+             }
+             />
+             <Route path='/gestion-articulos'element={<RutaProtegidaPorRol rolesPermitidos={['ADMIN']}><GestionArticulos /></RutaProtegidaPorRol>
              }
              />
 

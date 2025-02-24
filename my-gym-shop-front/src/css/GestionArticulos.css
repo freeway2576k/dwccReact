@@ -1,0 +1,106 @@
+:root {
+    --naranja: #ff6200;
+    --negro: #1a1a1a;
+    --blanco: #ffffff;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    color: var(--negro);
+    background-color: var(--blanco);
+  }
+  
+  .hero3 {
+    text-align: center;
+    padding: 2rem 0;
+  }
+  
+  .hero3 h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--negro);
+  }
+  
+  .hero3 p {
+    font-size: 1.25rem;
+    color: var(--negro);
+  }
+  
+  .section-title {
+    color: var(--naranja);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  
+  .card {
+    background-color: var(--blanco);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-control,
+  .form-select {
+    border-color: var(--negro);
+    border-radius: 5px;
+  }
+  
+  .form-control:focus,
+  .form-select:focus {
+    border-color: var(--naranja);
+    box-shadow: 0 0 0 0.2rem rgba(255, 98, 0, 0.25);
+  }
+  
+  .btn.btn-naranja {
+    background-color: var(--naranja);
+    color: var(--blanco);
+    padding: 0.8rem 2rem;
+    border: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .btn.btn-naranja:hover {
+    background-color: #e55a00;
+    color: var(--blanco);
+    transform: translateY(-2px);
+  }
+  
+  .btn-outline-dark {
+    color: var(--negro);
+    border-color: var(--negro);
+  }
+  
+  .btn-outline-dark:hover {
+    background-color: var(--negro);
+    color: var(--blanco);
+  }
+  
+  .btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+  }
+  
+  .btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: var(--blanco);
+  }
+  
+  .table-dark {
+    background-color: var(--negro);
+    color: var(--blanco);
+  }
+  
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: rgba(255, 98, 0, 0.1);
+  }
+  
+  .btn-sm {
+    padding: 0.4rem 1rem;
+  }
