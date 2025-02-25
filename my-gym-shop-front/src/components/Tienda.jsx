@@ -49,7 +49,7 @@ export const Tienda = () => {
               <div className="col-md-4" key={index}>
                 <div className="card p-3 h-100">
                   <img
-                    src="https://images.unsplash.com/photo-1605296867424-35fc25bfda20?q=80&w=2070"
+                    src={'http://localhost:5000/uploads/imgProductos/' + articulo.imagen}
                     alt={articulo.nombre}
                     className="card-img-top"
                   />
@@ -76,7 +76,7 @@ export const Tienda = () => {
                         <div className="row">
                           <div className="col-md-6">
                             <img
-                              src="https://images.unsplash.com/photo-1605296867424-35fc25bfda20?q=80&w=2070"
+                              src={'http://localhost:5000/uploads/imgProductos/' + articulo.imagen}
                               alt={articulo.nombre}
                               className="img-fluid rounded"
                             />

@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const articuloSchema = new mongoose.Schema({
+    imagen: {type: String},
     nombre: {type: String, required: true},
     categoria: {type: String, required: true},
     precio: {type: Number, required: true},

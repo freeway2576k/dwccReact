@@ -83,7 +83,7 @@ router.post(
         return res.status(401).json({ mensaje: "Contraseña incorrecta" });
 
       const payload = { id: usuarioEncontrado._id, rol: usuarioEncontrado.rol };
-      const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
+      const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "8h" });
 
       res.json({ mensaje: "Usuario autenticado",usuario: usuarioEncontrado, token: token, rol: usuarioEncontrado.rol });
     } catch (error) {
