@@ -17,6 +17,6 @@ router.post("/upload/:folder", (req, res, next) => {
 //--------------------------------------------------------------------//
 
 //--------------------Eliminar Ficheros -------------------------------//
-router.delete("/upload/:folder/:filename", deleteFile);
+router.delete("/delete/:folder/:filename", deleteFile);
 //--------------------------------------------------------------------//
 export default router;

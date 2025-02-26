@@ -38,12 +38,7 @@ export const GestionArticulos = () => {
         headers: { "Content-Type": "multipart/form-data" }
       });
       console.log("Archivo subido:", response.data);
-      console.log('ruta fichero', response.data.fileUrl);
-      setArticulo((prevArticulo) => ({
-        ...prevArticulo,
-        imagen: response.data.fileUrl,
-      }));
-
+      return response.data.fileUrl;
     } catch (error) {
       console.error("Error al subir el archivo:", error);
     }
@@ -57,21 +52,27 @@ export const GestionArticulos = () => {
       ...prevArticulo,
       [name]: value,
     }));
-    console.log(articulo);
   };
   //-----------------------------------------------------------------------------//
   //--------------------- para guardar articulo --------------------------------//
   const almacenarArticulo = async (e) => {
     e.preventDefault();
-    await subirImagen();
     try {
+     const imagenSubida = await subirImagen();
+     console.log("nombre fichero subido: ", imagenSubida);
+
+     const articuloConImagen = {
+      ...articulo,
+      imagen: imagenSubida
+  };
+  console.log("articulo con imagen", articuloConImagen)
       const response = await fetch("http://localhost:5000/atlas/articulos/", {
         method: "POST",
         headers: {
           "Authorization": token,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(articulo),
+        body: JSON.stringify(articuloConImagen),
       });
       if (response.ok) {
         console.log("Articulo guardado correctamente");
@@ -88,6 +89,14 @@ export const GestionArticulos = () => {
   const modificarArticulo = async (e) => {
     e.preventDefault();
     try {
+      if (file) {
+        const imagenSubida = await subirImagen();
+        const articuloConImagen = {
+          ...articulo,
+          imagen: imagenSubida
+      };
+      }
+
       const response = await fetch("http://localhost:5000/atlas/articulos/" + articulo._id, {
         method: "PUT",
         headers: {
@@ -108,8 +117,21 @@ export const GestionArticulos = () => {
   };
   //-----------------------------------------------------------------------------//
   //--------------------- para eliminar articulo -------------------------------//
-  const eliminarArticulo = async (id) => {
+  const eliminarArticulo = async (id, filename) => {
     try {
+      if (filename !== '') {
+        const response = await fetch("http://localhost:5000/atlas/ficheros/delete/imgProductos/" + filename, {
+          method: "DELETE",
+          headers: {
+            "Authorization": token,
+          }
+        });
+        if (response.ok) {
+          console.log("Fichero eliminado correctamente");
+        } else {
+          console.log("Error al eliminar fichero");
+        }
+      }
       const response = await fetch("http://localhost:5000/atlas/articulos/" + id, {
         method: "DELETE",
         headers: {
@@ -329,7 +351,7 @@ export const GestionArticulos = () => {
                           <button className="btn btn-naranja btn-sm me-2" onClick={() => seleccionarArticulo(articulo._id)}>
                             Editar
                           </button>
-                          <button className="btn btn-outline-danger btn-sm" onClick={() => eliminarArticulo(articulo._id)}>
+                          <button className="btn btn-outline-danger btn-sm" onClick={() => eliminarArticulo(articulo._id, articulo.imagen)}>
                             Eliminar
                           </button>
                         </div>
