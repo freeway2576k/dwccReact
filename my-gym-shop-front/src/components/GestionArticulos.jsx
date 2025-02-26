@@ -90,13 +90,37 @@ export const GestionArticulos = () => {
     e.preventDefault();
     try {
       if (file) {
+        const response1 = await fetch("http://localhost:5000/atlas/ficheros/delete/imgProductos/" + articulo.imagen, {
+          method: "DELETE",
+          headers: {
+            "Authorization": token,
+          }
+        });
+        console.log(response1);
+        if (response1.ok) {
+          console.log("Fichero eliminado correctamente");
+        }
         const imagenSubida = await subirImagen();
         const articuloConImagen = {
           ...articulo,
           imagen: imagenSubida
       };
+      console.log(articuloConImagen);
+      const response = await fetch("http://localhost:5000/atlas/articulos/" + articulo._id, {
+        method: "PUT",
+        headers: {
+          "Authorization": token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(articuloConImagen),
+      });
+      if (response.ok) {
+        console.log("Articulo modificado correctamente");
+        obtenerArticulos();
+      } else {
+        console.log("Error al modificar articulo");
       }
-
+    }else{
       const response = await fetch("http://localhost:5000/atlas/articulos/" + articulo._id, {
         method: "PUT",
         headers: {
@@ -111,6 +135,7 @@ export const GestionArticulos = () => {
       } else {
         console.log("Error al modificar articulo");
       }
+    }
     } catch (error) {
       console.log(error);
     }
