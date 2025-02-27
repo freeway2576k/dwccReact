@@ -1,12 +1,20 @@
 import { useState, useEffect } from 'react'
 import './../css/Tienda.css'
 import useAuthStore from '../store/authStore';
+import  useCartStore from '../store/cartStore';
 
 export const Tienda = () => {
   const token = useAuthStore.getState().token;
 
   const [articulos, setArticulos] = useState([]);
 
+  //--------------------- pa lo del carrito --------------------------------//
+  const { carrito, agregarProducto, removerProducto, incrementarCantidad, decrementarCantidad, borrarCarrito } = useCartStore();
+  const manejarAnhadirAlCarrito = (articulo) => {
+    agregarProducto(articulo);
+    //meter alerta de anhadido al carrito//
+  }
+  //-----------------------------------------------------------------------------//
   //--------------------- para obtener articulos --------------------------------//
   const obtenerArticulos = async () => {
     try {
@@ -35,13 +43,11 @@ export const Tienda = () => {
   return (
     <main className="d-flex flex-column py-5">
       <section className="container">
-        {/* Hero Section */}
         <div className="heroTienda mb-5">
           <h1>Tienda</h1>
           <p>Explora nuestras máquinas y accesorios para gimnasios.</p>
         </div>
 
-        {/* Lista de Artículos */}
         <div className="row g-4">
 
           {articulos.map((articulo, index) => {
@@ -56,15 +62,17 @@ export const Tienda = () => {
                   <h3 className="card-title">{articulo.nombre}</h3>
                   <p className="card-price"><strong>Precio:</strong> ${articulo.precio}</p>
                   <button
-                    className="btn btn-naranja mt-auto"
+                    className="btn btn-outline-dark mt-auto"
                     data-bs-toggle="modal"
                     data-bs-target={`#articleModal${index}`}
                   >
                     Ver Más Detalles
                   </button>
+                  <button className='btn btn-naranja mt-2' onClick={() =>manejarAnhadirAlCarrito(articulo)}> 
+                    <i className="fa-solid fa-cart-shopping">Añadir al Carrito</i>
+                  </button>
                 </div>
 
-                {/* Modal Dinámico */}
                 <div className="modal fade" id={`articleModal${index}`} tabIndex="-1" aria-labelledby={`articleModalLabel${index}`} aria-hidden="true">
                   <div className="modal-dialog modal-lg">
                     <div className="modal-content">

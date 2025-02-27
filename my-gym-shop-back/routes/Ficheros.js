@@ -1,10 +1,12 @@
 import express from "express";
 import multerConfig from "../middleware/multerConfig.js";
 import { uploadFile, deleteFile } from "../controller/fileUploadController.js";
+import authMiddleware from '../middleware/authMiddleware.js'; //pa proteger las rutas, llamarlo entre la ruta y el metodo
+
 const router = express.Router();
 
 //--------------------Subir Ficheros ----------------------------------//
-router.post("/upload/:folder", (req, res, next) => {
+router.post("/upload/:folder", authMiddleware, (req, res, next) => {
     const folder = req.params.folder;
     const upload = multerConfig(folder).single("file");
     upload(req, res, (err) => {
@@ -17,6 +19,6 @@ router.post("/upload/:folder", (req, res, next) => {
 //--------------------------------------------------------------------//
 
 //--------------------Eliminar Ficheros -------------------------------//
-router.delete("/delete/:folder/:filename", deleteFile);
+router.delete("/delete/:folder/:filename", authMiddleware, deleteFile);
 //--------------------------------------------------------------------//
 export default router;

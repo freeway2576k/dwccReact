@@ -12,6 +12,7 @@ import { GestionArticulos } from '../components/GestionArticulos';
 import { Login } from '../components/Login';
 import { Registro } from '../components/Registro';
 import { NoAutorizado } from '../components/NoAutorizado';
+import { Carrito } from '../components/Carrito';
 
 
 const AppRoutes = () => {
@@ -30,6 +31,7 @@ const AppRoutes = () => {
             {/* Rutas pa los Clientes */}
             <Route path='/tienda' element={<RutaProtegidaPorRol rolesPermitidos={['ADMIN','USER']}><Tienda /></RutaProtegidaPorRol>
              } />
+             <Route path='/carrito' element={<RutaProtegidaPorRol rolesPermitidos={['ADMIN', 'USER']}><Carrito/></RutaProtegidaPorRol>}/>
 
             {/* Rutas pa los admins */}
             <Route path='/gestion-usuarios'element={<RutaProtegidaPorRol rolesPermitidos={['ADMIN']}><GestionUsuarios /></RutaProtegidaPorRol>

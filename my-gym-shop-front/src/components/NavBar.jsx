@@ -2,7 +2,7 @@ import "./../css/navbar.css";
 import useAuthStore from '../store/authStore';
 import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import useCartStore from "../store/cartStore";
 export const NavBar = () => {
     const { cerrarSesion } = useAuthStore();
     const hacerLogout =  (e) => {
@@ -10,6 +10,9 @@ export const NavBar = () => {
         cerrarSesion();
         Navigate('/');
     }
+//-------------------pa lo del carrito----------------------------//
+    const carrito = useCartStore(state => state.carrito);
+//----------------------------------------------------------------//
 
     return (
         <nav className="navbar navbar-expand-lg">
@@ -66,6 +69,11 @@ export const NavBar = () => {
                         <li className="nav-item">
                             <Link to={"/gestion-articulos"} className="nav-link">
                                 Gestion de Articulos
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to={"/carrito"} className="nav-link">
+                                <i className="bi bi-cart-fill fs-5">({carrito.length})</i>
                             </Link>
                         </li>
                         <li className="nav-item dropdown">
