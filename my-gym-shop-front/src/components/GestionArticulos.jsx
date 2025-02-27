@@ -86,6 +86,7 @@ export const GestionArticulos = () => {
   };
   //-----------------------------------------------------------------------------//
   //--------------------- para modificar articulo ------------------------------//
+  const [isModificando, setIsModificando] = useState(false); //para saber si se esta modificando el articulo
   const modificarArticulo = async (e) => {
     e.preventDefault();
     try {
@@ -117,6 +118,8 @@ export const GestionArticulos = () => {
       if (response.ok) {
         console.log("Articulo modificado correctamente");
         obtenerArticulos();
+        limpiarFormulario();
+        setIsModificando(false);
       } else {
         console.log("Error al modificar articulo");
       }
@@ -132,6 +135,8 @@ export const GestionArticulos = () => {
       if (response.ok) {
         console.log("Articulo modificado correctamente");
         obtenerArticulos();
+        limpiarFormulario();
+        setIsModificando(false);
       } else {
         console.log("Error al modificar articulo");
       }
@@ -206,8 +211,30 @@ export const GestionArticulos = () => {
   const seleccionarArticulo = (id) => {
     const articuloSeleccionado = articulos.find(articulo => articulo._id === id);
     setArticulo(articuloSeleccionado);
+    setIsModificando(true);
   };
   //-----------------------------------------------------------------------------//
+
+  //----------------------- pa limpiar el formularioo -------------------------//
+  const limpiarFormulario = () => {
+    setArticulo({
+      imagen: "",
+      nombre: "",
+      categoria: "",
+      precio: "",
+      stock: "",
+      marca: "",
+      peso: "",
+      dimensiones: "",
+      estado: "",
+      descripcion: "",
+    });
+    setFile(null);
+    setIsModificando(false);
+  };
+  //-----------------------------------------------------------------//
+
+
 
   return (
     <main className="d-flex flex-column py-5">
@@ -334,8 +361,16 @@ export const GestionArticulos = () => {
               </div>
             </div>
             <div className="d-flex gap-3 mt-4">
+              {
+                !isModificando &&
               <button type="submit" className="btn btn-naranja" onClick={almacenarArticulo}>Guardar</button>
-              <button type="button" className="btn btn-outline-dark" onClick={modificarArticulo}>Modificar</button>
+              }
+              {
+                isModificando &&
+              <button type="button" className="btn btn-naranja" onClick={modificarArticulo}>Modificar</button>
+              }
+              <button type="button" className="btn btn-outline-dark" onClick={limpiarFormulario}>Limpiar</button>
+
             </div>
           </form>
         </div>

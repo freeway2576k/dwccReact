@@ -2,6 +2,7 @@ import {useState} from 'react'
 import './../css/Login.css'
 import useAuthStore from '../store/authStore';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const Login = () => {
   const { iniciarSesion } = useAuthStore();
@@ -65,6 +66,7 @@ export const Login = () => {
                 />
               </div>
               <button type="submit" className="btn btn-naranja w-100" onClick={hacerLogin}>Iniciar Sesión</button>
+              <Link to="/register" className="btn btn-outline-dark mt mt-2 w-100">Registrarse</Link>
             </form>
             <p className="text-center mt-3">
               <a href="#forgot-password" className="text-muted">¿Olvidaste tu contraseña?</a>

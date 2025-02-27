@@ -81,10 +81,13 @@ export const GestionUsuarios = () => {
     const seleccionarUsuario = (id) => {
         const usuarioSeleccionado = usuarios.find(usuario => usuario._id === id);
         setUsuario(usuarioSeleccionado);
+        setIsModificando(true);
     };
   //-----------------------------------------------------------------//
 
   //----------------------- modificar usuario -----------------------//
+  const [isModificando, setIsModificando] = useState(false); //para saber si se esta modificando el usuario
+
     const modificarUsuario = async (e) => {
       e.preventDefault();
       try {
@@ -99,6 +102,8 @@ export const GestionUsuarios = () => {
         if (response.ok) {
           console.log("Usuario modificado correctamente");
           obtenerUsuarios();
+          limpiarFormulario();
+          setIsModificando(false);
         } else {
           console.log("Error al modificar usuario");
         }
@@ -126,6 +131,18 @@ export const GestionUsuarios = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+  //-----------------------------------------------------------------//
+
+  //----------------------- pa limpiar el formularioo -------------------------//
+  const limpiarFormulario = () => {
+    setUsuario({
+      nombre: "",
+      email: "",
+      telefono: "",
+      rol: "",
+    });
+    setIsModificando(false);
   };
   //-----------------------------------------------------------------//
 
@@ -200,15 +217,23 @@ export const GestionUsuarios = () => {
               </div>
             </div>
             <div className="d-flex gap-3 mt-4">
+              { !isModificando && 
               <button
                 type="submit"
                 className="btn btn-naranja"
                 onClick={almacenarUsuario}
               >
                 Guardar
-              </button>
-              <button type="button" className="btn btn-outline-dark" onClick={modificarUsuario}>
+              </button> 
+              }
+              {
+                isModificando && 
+              <button type="button" className="btn btn-naranja" onClick={modificarUsuario}>
                 Modificar
+              </button>
+              }
+              <button type="button" className="btn btn-outline-dark" onClick={limpiarFormulario}>
+                Limpiar
               </button>
             </div>
           </form>

@@ -1,5 +1,6 @@
 import React from 'react'
 import './../css/inicio.css'
+import { Link } from "react-router-dom";
 export const Inicio = () => {
     return (
         <main className="d-flex flex-column">
@@ -8,7 +9,7 @@ export const Inicio = () => {
           <div className="container">
             <h1>Equipos de Gimnasio de Élite</h1>
             <p>Eleva tu gimnasio al siguiente nivel con nuestras máquinas de musculación de calidad profesional.</p>
-            <a href="#contacto" className="btn btn-naranja mt-4">Solicita una Cotización</a>
+            <Link to="/contacto" className="btn btn-naranja mt-4">Solicita una Cotización</Link>
           </div>
         </section>
   
@@ -44,8 +45,8 @@ export const Inicio = () => {
         <section className="py-5 bg-dark text-white text-center">
           <div className="container">
             <h2 className="mb-4">¿Listo para equipar tu gimnasio?</h2>
-            <p className="lead">Contáctanos hoy y obtén una solución personalizada para tu negocio.</p>
-            <a href="#contacto" className="btn btn-naranja mt-3">Hablar con un Experto</a>
+            <p className="lead">Accede a nuestro catalogo hoy y obtén una solución personalizada para tu negocio.</p>
+            <Link to="/tienda" className="btn btn-naranja mt-3">Ir a la tienda</Link>
           </div>
         </section>
       </main>

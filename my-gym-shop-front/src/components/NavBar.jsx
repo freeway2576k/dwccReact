@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useCartStore from "../store/cartStore";
 export const NavBar = () => {
+    const { isAuthenticated, rol } = useAuthStore();
     const { cerrarSesion } = useAuthStore();
     const hacerLogout =  (e) => {
         e.preventDefault();
@@ -46,11 +47,13 @@ export const NavBar = () => {
                                 Sobre Nosotros
                             </Link>
                         </li>
+                        { isAuthenticated &&
                         <li className="nav-item">
                             <Link to={"/tienda"} className="nav-link">
                                 Tienda
                             </Link>
                         </li>
+                        }
                         <li className="nav-item">
                             <Link to={"/contacto"} className="nav-link">
                                 Contacto
@@ -61,16 +64,20 @@ export const NavBar = () => {
                                 FAQ
                             </Link>
                         </li>
+                        {rol === 'ADMIN' &&
+                        <>
                         <li className="nav-item">
                             <Link to={"/gestion-usuarios"} className="nav-link">
                                 Gestion de Usuarios
                             </Link>
-                        </li>
+                        </li> 
                         <li className="nav-item">
                             <Link to={"/gestion-articulos"} className="nav-link">
                                 Gestion de Articulos
                             </Link>
                         </li>
+                        </>
+                        }
                         <li>
                             <Link to={"/carrito"} className="nav-link">
                                 <i className="bi bi-cart-fill fs-5">({carrito.length})</i>
@@ -92,6 +99,9 @@ export const NavBar = () => {
                                 className="dropdown-menu dropdown-menu-end"
                                 aria-labelledby="userDropdown"
                             >
+                                {
+                                    !isAuthenticated &&
+                                    <>
                                 <li>
                                     <Link to="/login" className="dropdown-item">
                                         Login
@@ -102,11 +112,17 @@ export const NavBar = () => {
                                         Registro
                                     </Link>
                                 </li>
+                                    
+                                    </>
+                                }
+                                {
+                                    isAuthenticated &&
                                 <li>
                                     <button className="dropdown-item" onClick={hacerLogout}>
                                         Logout
                                     </button>
                                 </li>
+                                }
                             </ul>
                         </li>
                     </ul>

@@ -102,7 +102,7 @@ export const Tienda = () => {
                         </div>
                       </div>
                       <div className="modal-footer">
-                        <button type="button" className="btn btn-naranja">Añadir al Carrito</button>
+                        <button type="button" className="btn btn-naranja" onClick={() => agregarProducto(articulo)}>Añadir al Carrito</button>
                         <button type="button" className="btn btn-outline-dark" data-bs-dismiss="modal">Cerrar</button>
                       </div>
                     </div>
