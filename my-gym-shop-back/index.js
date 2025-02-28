@@ -8,6 +8,7 @@ import rutasArticulos from './routes/Articulo.js';
 import rutasAuth from './routes/authentication.js';
 import rutasFicheros from './routes/Ficheros.js';
 import rutasPago from './routes/Stripe.js';
+import rutasMail from './routes/Mail.js'
 import dotenv from 'dotenv'; //pa que no te hackiee las pass y las keys
 
 dotenv.config();
@@ -28,6 +29,7 @@ app.use('/atlas/usuarios', rutasUsuarios);
 app.use('/atlas/articulos', rutasArticulos);
 app.use('/atlas/ficheros', rutasFicheros);
 app.use('/atlas/pago', rutasPago);
+app.use('/atlas/mail', rutasMail);
 app.use("/uploads", express.static(path.join("uploads")));
 //--------------------------------------------------------------------//
 

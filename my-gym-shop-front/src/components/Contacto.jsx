@@ -1,6 +1,42 @@
 import React from 'react'
 
 export const Contacto = () => {
+  const enviarCorreo = () => {
+    //meter validacion de camposs
+
+      fetch('http://localhost:5000/atlas/mail/enviar-correo', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(this.contacto),
+      })
+          .then(response => response.json())
+          .then(data => {
+              if (data.message) {
+                  console.log('¡Mensaje enviado con éxito!');
+                  // Opcional: Reseteamos el formulario
+                  this.contacto.nombre = '';
+                  this.contacto.telefono = '';
+                  this.contacto.email = '';
+                  this.contacto.mensaje = '';
+                  Swal.fire({
+                      icon: 'success',
+                      title: 'Mensaje Enviado con Éxito',
+                      showConfirmButton: false,
+                      timer: 1500
+                  });
+              } else {
+                  console.log('Hubo un problema al enviar el mensaje. Intenta de nuevo.');
+              }
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              console.log('Hubo un error en la conexión con el servidor. Intenta nuevamente.');
+          });
+  }
+  
+
   return (
     <main className="d-flex flex-column py-5">
       <section className="container">
