@@ -11,19 +11,19 @@
   }
   
   /* Hero Section */
-  .hero {
+  .heroContacto {
     text-align: center;
     padding: 2rem 0;
   }
   
-  .hero h1 {
+  .heroContacto h1 {
     font-size: 2.5rem;
     font-weight: 900;
     text-transform: uppercase;
     color: var(--negro);
   }
   
-  .hero p {
+  .heroContacto p {
     font-size: 1.25rem;
     color: var(--negro);
   }

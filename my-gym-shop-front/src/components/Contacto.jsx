@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+import './../css/Contacto.css'
 export const Contacto = () => {
 
   //-----------------------doonde guardamos el objecto contaco -------------------------//
@@ -17,6 +17,8 @@ export const Contacto = () => {
     })
    }
   //------------------------------------------------------------------------------------//
+
+  //----------------------- enviar correo -------------------------//
   const enviarCorreo = (e) => {
     e.preventDefault();
     //meter validacion de camposs
@@ -34,6 +36,7 @@ export const Contacto = () => {
               if (data.message) {
                   console.log('¡Mensaje enviado con éxito!');
                   // Opcional: Reseteamos el formulario
+                  limpiarFormulario();
               } else {
                   console.log('Hubo un problema al enviar el mensaje. Intenta de nuevo.');
               }
@@ -43,7 +46,17 @@ export const Contacto = () => {
               console.log('Hubo un error en la conexión con el servidor. Intenta nuevamente.');
           });
   }
-  
+  //------------------------------------------------------------------------------------//
+
+  //----------------------- Limpiar formulario -------------------------//
+  const limpiarFormulario = () => {
+    setContacto({
+      nombre: "",
+      email: "",
+      mensaje: "",
+    });
+  };
+  //------------------------------------------------------------------------------------//
 
   return (
     <main className="d-flex flex-column py-5">
