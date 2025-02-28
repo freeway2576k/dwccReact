@@ -1,31 +1,39 @@
-import React from 'react'
+import { useState } from 'react'
 
 export const Contacto = () => {
-  const enviarCorreo = () => {
+
+  //-----------------------doonde guardamos el objecto contaco -------------------------//
+
+  const [contacto, setContacto] = useState({
+    nombre: "",
+    email: "",
+    mensaje: "",
+  });
+
+  const manejarCambiosInput = (e) =>{
+    const { name, value} = e.target;
+    setContacto(prevContacto =>{
+      return {...prevContacto, [name]: value}
+    })
+   }
+  //------------------------------------------------------------------------------------//
+  const enviarCorreo = (e) => {
+    e.preventDefault();
     //meter validacion de camposs
+    console.log("datos recolectados", contacto);
 
       fetch('http://localhost:5000/atlas/mail/enviar-correo', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
           },
-          body: JSON.stringify(this.contacto),
+          body: JSON.stringify(contacto),
       })
           .then(response => response.json())
           .then(data => {
               if (data.message) {
                   console.log('¡Mensaje enviado con éxito!');
                   // Opcional: Reseteamos el formulario
-                  this.contacto.nombre = '';
-                  this.contacto.telefono = '';
-                  this.contacto.email = '';
-                  this.contacto.mensaje = '';
-                  Swal.fire({
-                      icon: 'success',
-                      title: 'Mensaje Enviado con Éxito',
-                      showConfirmButton: false,
-                      timer: 1500
-                  });
               } else {
                   console.log('Hubo un problema al enviar el mensaje. Intenta de nuevo.');
               }
@@ -40,15 +48,12 @@ export const Contacto = () => {
   return (
     <main className="d-flex flex-column py-5">
       <section className="container">
-        {/* Hero Section */}
         <div className="heroContacto mb-5">
           <h1>Contacto</h1>
           <p>Estamos aquí para ayudarte a equipar tu gimnasio.</p>
         </div>
 
-        {/* Formulario y Información de Contacto */}
         <div className="row g-4">
-          {/* Formulario */}
           <div className="col-md-6">
             <div className="card p-4">
               <h2 className="section-title mb-4">Envía tu Mensaje</h2>
@@ -59,6 +64,9 @@ export const Contacto = () => {
                     type="text"
                     className="form-control"
                     id="name"
+                    name='nombre'
+                    value={contacto.nombre}
+                    onChange={manejarCambiosInput}
                     placeholder="Ej. Juan Pérez"
                   />
                 </div>
@@ -68,6 +76,9 @@ export const Contacto = () => {
                     type="email"
                     className="form-control"
                     id="email"
+                    name='email'
+                    value={contacto.email}
+                    onChange={manejarCambiosInput}
                     placeholder="Ej. usuario@gym.com"
                   />
                 </div>
@@ -78,14 +89,16 @@ export const Contacto = () => {
                     id="message"
                     rows="5"
                     placeholder="Escribe tu consulta aquí..."
+                    name='mensaje'
+                    value={contacto.mensaje}
+                    onChange={manejarCambiosInput}
                   ></textarea>
                 </div>
-                <button type="submit" className="btn btn-naranja w-100">Enviar</button>
+                <button type="submit" className="btn btn-naranja w-100" onClick={enviarCorreo}>Enviar</button>
               </form>
             </div>
           </div>
 
-          {/* Información de Contacto */}
           <div className="col-md-6">
             <div className="card p-4 h-100">
               <h2 className="section-title mb-4">Nuestra Información</h2>
