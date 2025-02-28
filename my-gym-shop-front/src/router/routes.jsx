@@ -13,6 +13,8 @@ import { Login } from '../components/Login';
 import { Registro } from '../components/Registro';
 import { NoAutorizado } from '../components/NoAutorizado';
 import { Carrito } from '../components/Carrito';
+import { ExitoCompra } from '../components/ExitoCompra';
+import { FalloCompra } from '../components/FalloCompra';
 
 
 const AppRoutes = () => {
@@ -32,6 +34,9 @@ const AppRoutes = () => {
             <Route path='/tienda' element={<RutaProtegidaPorRol rolesPermitidos={['ADMIN','USER']}><Tienda /></RutaProtegidaPorRol>
              } />
              <Route path='/carrito' element={<RutaProtegidaPorRol rolesPermitidos={['ADMIN', 'USER']}><Carrito/></RutaProtegidaPorRol>}/>
+             <Route path='/exito' element={<RutaProtegidaPorRol rolesPermitidos={['ADMIN', 'USER']}><ExitoCompra/></RutaProtegidaPorRol>}/>
+             <Route path='/fallo' element={<RutaProtegidaPorRol rolesPermitidos={['ADMIN', 'USER']}><FalloCompra/></RutaProtegidaPorRol>}/>
+
 
             {/* Rutas pa los admins */}
             <Route path='/gestion-usuarios'element={<RutaProtegidaPorRol rolesPermitidos={['ADMIN']}><GestionUsuarios /></RutaProtegidaPorRol>

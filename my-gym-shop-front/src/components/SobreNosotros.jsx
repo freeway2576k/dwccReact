@@ -3,7 +3,7 @@ import './../css/SobreNosotros.css'
 export const SobreNosotros = () => {
   return (
     <main className="d-flex flex-column">
-      <section className="hero">
+      <section className="heroNosotros">
         <div className="container">
           <h1>Sobre Nosotros</h1>
           <p>Construimos el futuro del fitness profesional con equipos de primera calidad para gimnasios.</p>

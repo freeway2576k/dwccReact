@@ -1,8 +1,13 @@
 import React from "react";
 import "./../css/Carrito.css";
 import useCartStore from "../store/cartStore";
+import {loadStripe} from "@stripe/stripe-js";
+import useAuthStore from "../store/authStore";
+import { Link } from "react-router-dom";
 
 export const Carrito = () => {
+  const token = useAuthStore.getState().token;
+  
   const {
     carrito,
     envio,
@@ -15,6 +20,36 @@ export const Carrito = () => {
     decrementarCantidad,
     borrarCarrito,
   } = useCartStore();
+
+  const finalizarCompra = async () =>{
+    console.log("iniciando checkout");
+    console.log("process.env.REACT_APP_STRIPE_PUBLIC_KEY", import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+    const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+    console.log("stripe cargado, enviando al backend", JSON.stringify({ items: carrito, amount: precioTotalEnvio().toFixed(2) }));
+
+    const response = await fetch("http://localhost:5000/atlas/pago/crear-checkout", {
+      method: "POST",
+      headers: {
+        "Authorization": token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ items: carrito, amount: precioTotalEnvio().toFixed(2) })
+    });
+
+    const session = await response.json();
+    console.log("session response", session);
+
+    if (!session.id) {
+      console.log("no se pudo crear el checkout");
+      return;
+    }
+
+    const { error } = await stripe.redirectToCheckout({ sessionId: session.id });
+    if (error) {
+      console.log("error al redireccionar al checkout", error);
+    }
+  }
+
 
   return (
     <main className="d-flex flex-column py-5">
@@ -29,7 +64,9 @@ export const Carrito = () => {
               <h2 className="section-title">
                 Tu carrito esta muy solo, agrega algo anda 🤙
               </h2>
+              
             </div>
+            <Link to="/tienda" className="btn btn-naranja">Volver a la Tienda</Link>
           </div>
         </section>
       )}
@@ -47,7 +84,7 @@ export const Carrito = () => {
             </div>
             <div className="row g-4">
               {carrito.map((articulo, index) => (
-                <div className="col-md-4">
+                <div className="col-md-4" key={index}>
                   <div className="card h-100 p-3">
                     <div className="d-flex align-items-center">
                       <img
@@ -61,7 +98,7 @@ export const Carrito = () => {
                       <div>
                         <h3 className="card-title">{articulo.nombre}</h3>
                         <p>
-                          <strong>Precio:</strong> ${articulo.precio}
+                          <strong>Precio:</strong> ${articulo.precio.toFixed(2)}
                         </p>
                       </div>
                     </div>
@@ -93,7 +130,7 @@ export const Carrito = () => {
                       </div>
                       <p>
                         <strong>Subtotal:</strong> $
-                        {precioSubtotal(articulo._id)}
+                        {precioSubtotal(articulo._id).toFixed(2)}
                       </p>
                     </div>
                     <button
@@ -111,17 +148,17 @@ export const Carrito = () => {
             <h2 className="section-title mb-4">Resumen</h2>
             <div className="d-flex justify-content-between mb-3">
               <span>Subtotal:</span>
-              <span>${precioTotal()}</span>
+              <span>${precioTotal().toFixed(2)}</span>
             </div>
             <div className="d-flex justify-content-between mb-3">
               <span>Envio:</span>
-              <span>${envio}</span>
+              <span>${envio.toFixed(2)}</span>
             </div>
             <div className="d-flex justify-content-between fw-bold">
               <span>Total:</span>
-              <span>${precioTotalEnvio()}</span>
+              <span>${precioTotalEnvio().toFixed(2)}</span>
             </div>
-            <button className="btn btn-naranja mt-4 w-100">
+            <button className="btn btn-naranja mt-4 w-100" onClick={finalizarCompra}>
               Proceder al Pago
             </button>
           </div>

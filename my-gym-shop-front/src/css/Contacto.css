@@ -1,0 +1,95 @@
+:root {
+    --naranja: #ff6200;
+    --negro: #1a1a1a;
+    --blanco: #ffffff;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    color: var(--negro);
+    background-color: var(--blanco);
+  }
+  
+  /* Hero Section */
+  .hero {
+    text-align: center;
+    padding: 2rem 0;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--negro);
+  }
+  
+  .hero p {
+    font-size: 1.25rem;
+    color: var(--negro);
+  }
+  
+  /* Secciones */
+  .section-title {
+    color: var(--naranja);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  
+  /* Tarjeta (card) */
+  .card {
+    background-color: var(--blanco);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Formulario */
+  .form-control,
+  .form-select {
+    border-color: var(--negro);
+    border-radius: 5px;
+  }
+  
+  .form-control:focus,
+  .form-select:focus {
+    border-color: var(--naranja);
+    box-shadow: 0 0 0 0.2rem rgba(255, 98, 0, 0.25);
+  }
+  
+  /* Botón */
+  .btn.btn-naranja {
+    background-color: var(--naranja);
+    color: var(--blanco);
+    padding: 0.8rem 2rem;
+    border: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .btn.btn-naranja:hover {
+    background-color: #e55a00;
+    color: var(--blanco);
+    transform: translateY(-2px);
+  }
+  
+  /* Información de Contacto */
+  .contact-info p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .contact-info i {
+    color: var(--naranja);
+    font-size: 1.2rem;
+  }
+  
+  /* Enlaces sociales */
+  .social-links a {
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+  }
+  
+  .social-links a:hover {
+    color: var(--naranja) !important;
+  }

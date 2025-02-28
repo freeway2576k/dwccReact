@@ -10,7 +10,7 @@
     background-color: var(--blanco);
   }
   
-  .hero {
+  .heroNosotros {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
       url('https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=2070');
     background-size: cover;
@@ -22,13 +22,13 @@
     text-align: center;
   }
   
-  .hero h1 {
+  .heroNosotros h1 {
     font-size: 3rem;
     font-weight: 900;
     text-transform: uppercase;
   }
   
-  .hero p {
+  .heroNosotros p {
     font-size: 1.5rem;
     max-width: 800px;
     margin: 1rem auto;
