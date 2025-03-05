@@ -1,0 +1,73 @@
+:root {
+    --naranja: #ff6200;
+    --negro: #1a1a1a;
+    --blanco: #ffffff;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    color: var(--negro);
+    background-color: var(--blanco);
+  }
+  
+  .heroGestion {
+    text-align: center;
+    padding: 2rem 0;
+  }
+  
+  .heroGestion h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--negro);
+  }
+  
+  .heroGestion p {
+    font-size: 1.25rem;
+    color: var(--negro);
+  }
+  
+  .section-title {
+    color: var(--naranja);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  
+  .card {
+    background-color: var(--blanco);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    height: 100%;
+  }
+  
+  .card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--negro);
+    margin-bottom: 0.5rem;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+    color: var(--negro);
+  }
+  
+  .text-naranja {
+    color: var(--naranja);
+  }
+  
+  .card-link {
+    text-decoration: none;
+  }
+  
+  .card-link:hover .card {
+    text-decoration: none;
+    color: var(--negro);
+  }

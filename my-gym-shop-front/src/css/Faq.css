@@ -10,7 +10,6 @@
     background-color: var(--blanco);
   }
   
-  /* Hero Section */
   .heroFaq {
     text-align: center;
     padding: 2rem 0;
@@ -28,7 +27,6 @@
     color: var(--negro);
   }
   
-  /* Secciones */
   .section-title {
     color: var(--naranja);
     font-weight: 700;
@@ -36,7 +34,6 @@
     margin-bottom: 2rem;
   }
   
-  /* Tarjeta (card) */
   .card {
     background-color: var(--blanco);
     border: none;
@@ -44,7 +41,6 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   }
   
-  /* Acordeón */
   .accordion-button {
     background-color: var(--blanco);
     color: var(--negro);

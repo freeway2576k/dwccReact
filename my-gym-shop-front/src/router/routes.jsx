@@ -15,7 +15,7 @@ import { NoAutorizado } from '../components/NoAutorizado';
 import { Carrito } from '../components/Carrito';
 import { ExitoCompra } from '../components/ExitoCompra';
 import { FalloCompra } from '../components/FalloCompra';
-
+import { PanelGestion } from '../components/PanelGestion';
 
 const AppRoutes = () => {
     return (
@@ -45,6 +45,9 @@ const AppRoutes = () => {
              <Route path='/gestion-articulos'element={<RutaProtegidaPorRol rolesPermitidos={['ADMIN']}><GestionArticulos /></RutaProtegidaPorRol>
              }
              />
+
+             <Route path='/panel-gestion' element={<RutaProtegidaPorRol rolesPermitidos={['ADMIN']}><PanelGestion /></RutaProtegidaPorRol>
+             } />
 
         </Routes>
     );

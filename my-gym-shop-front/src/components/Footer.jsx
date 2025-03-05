@@ -1,5 +1,6 @@
 import React from 'react'
 import '../css/footer.css'
+import { Link } from 'react-router-dom'
 export const Footer = () => {
   return (
     <footer className="footer">
@@ -42,6 +43,7 @@ export const Footer = () => {
 
             <div className="footer-bottom text-center">
                 <p className="mb-0">&copy; 2025 The Gym Shop. Todos los derechos reservados.</p>
+                <Link to={'/terminos-y-condiciones'}> terminos y condiciones</Link>
             </div>
         </div>
     </footer>

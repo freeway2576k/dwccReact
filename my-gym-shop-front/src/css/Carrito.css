@@ -10,7 +10,6 @@
     background-color: var(--blanco);
   }
   
-  /* Hero Section */
   .heroCarrito {
     text-align: center;
     padding: 2rem 0;
@@ -28,7 +27,6 @@
     color: var(--negro);
   }
   
-  /* Secciones */
   .section-title {
     color: var(--naranja);
     font-weight: 700;
@@ -36,7 +34,6 @@
     margin-bottom: 2rem;
   }
   
-  /* Tarjeta (card) */
   .card {
     background-color: var(--blanco);
     border: none;
@@ -63,7 +60,6 @@
     margin-bottom: 0.5rem;
   }
   
-  /* Botones de cantidad */
   .input-group-sm .btn {
     padding: 0.25rem 0.5rem;
   }
@@ -78,12 +74,10 @@
     box-shadow: 0 0 0 0.2rem rgba(255, 98, 0, 0.25);
   }
   
-  /* Texto */
   p strong {
     color: var(--naranja);
   }
   
-  /* Botones */
   .btn.btn-naranja {
     background-color: var(--naranja);
     color: var(--blanco);
@@ -123,12 +117,10 @@
     padding: 0.4rem 1rem;
   }
   
-  /* Resumen */
   .fw-bold {
     font-weight: 700;
   }
   
-  /* Resumen ajustado */
   .card.mx-auto {
     max-width: 400px;
     margin: 0 auto;

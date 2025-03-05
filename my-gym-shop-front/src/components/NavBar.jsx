@@ -65,24 +65,21 @@ export const NavBar = () => {
                             </Link>
                         </li>
                         {rol === 'ADMIN' &&
-                        <>
+                        
                         <li className="nav-item">
-                            <Link to={"/gestion-usuarios"} className="nav-link">
-                                Gestion de Usuarios
+                            <Link to={"/panel-gestion"} className="nav-link">
+                                Panel de Gestion
                             </Link>
                         </li> 
-                        <li className="nav-item">
-                            <Link to={"/gestion-articulos"} className="nav-link">
-                                Gestion de Articulos
-                            </Link>
-                        </li>
-                        </>
+                        
                         }
+                        { isAuthenticated &&
                         <li>
                             <Link to={"/carrito"} className="nav-link">
                                 <i className="bi bi-cart-fill fs-5">({carrito.length})</i>
                             </Link>
                         </li>
+}
                         <li className="nav-item dropdown">
                             <a
                                 className="nav-link dropdown-toggle"

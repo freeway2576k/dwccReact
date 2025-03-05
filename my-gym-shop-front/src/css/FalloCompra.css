@@ -10,7 +10,6 @@
     background-color: var(--blanco);
   }
   
-  /* Hero Section */
   .hero {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
       url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070');
@@ -23,13 +22,11 @@
     justify-content: center;
   }
   
-  /* Ícono de error */
   .bi-exclamation-triangle {
-    color: #dc3545; /* Rojo para error, opcional */
+    color: #dc3545; 
     text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
   }
   
-  /* Títulos y texto */
   .display-4 {
     font-size: 3rem;
     font-weight: 900;
@@ -50,7 +47,6 @@
     margin: 0 auto 2rem;
   }
   
-  /* Botón */
   .btn.btn-naranja {
     background-color: var(--naranja);
     color: var(--blanco);

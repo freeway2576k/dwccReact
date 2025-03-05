@@ -10,19 +10,19 @@
     background-color: var(--blanco);
   }
   
-  .heroContacto {
+  .herCondiciones {
     text-align: center;
     padding: 2rem 0;
   }
   
-  .heroContacto h1 {
+  .heroCondiciones h1 {
     font-size: 2.5rem;
     font-weight: 900;
     text-transform: uppercase;
     color: var(--negro);
   }
   
-  .heroContacto p {
+  .heroCondiciones p {
     font-size: 1.25rem;
     color: var(--negro);
   }
@@ -41,48 +41,30 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   }
   
-  .form-control,
-  .form-select {
-    border-color: var(--negro);
-    border-radius: 5px;
+  .terms-content {
+    line-height: 1.6;
   }
   
-  .form-control:focus,
-  .form-select:focus {
-    border-color: var(--naranja);
-    box-shadow: 0 0 0 0.2rem rgba(255, 98, 0, 0.25);
+  .terms-section-title {
+    color: var(--naranja);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
   }
   
-  .btn.btn-naranja {
-    background-color: var(--naranja);
-    color: var(--blanco);
-    padding: 0.8rem 2rem;
-    border: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-  
-  .btn.btn-naranja:hover {
-    background-color: #e55a00;
-    color: var(--blanco);
-    transform: translateY(-2px);
-  }
-  
-  .contact-info p {
+  .terms-content p {
     font-size: 1rem;
     margin-bottom: 1rem;
   }
   
-  .contact-info i {
-    color: var(--naranja);
-    font-size: 1.2rem;
-  }
-  
-  .social-links a {
-    font-size: 1.5rem;
+  /* Enlace */
+  .text-muted {
+    color: var(--negro) !important;
+    text-decoration: none;
     transition: color 0.3s ease;
   }
   
-  .social-links a:hover {
+  .text-muted:hover {
     color: var(--naranja) !important;
   }
