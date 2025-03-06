@@ -4,6 +4,7 @@ import useCartStore from "../store/cartStore";
 import {loadStripe} from "@stripe/stripe-js";
 import useAuthStore from "../store/authStore";
 import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const Carrito = () => {
   const token = useAuthStore.getState().token;
@@ -58,7 +59,10 @@ export const Carrito = () => {
         <p>Revisa tus artículos antes de proceder al pago.</p>
       </div>
       {carrito.length === 0 && (
-        <section className="container">
+        <motion.section className="container"
+        initial={{opacity: 0}}
+        transition={{duration: 0.3, ease: "easeInOut"}}
+        animate={{opacity: 1}}>
           <div className="card p-4 mb-5">
             <div className="d-flex justify-content-between align-items-center mb-4">
               <h2 className="section-title">
@@ -68,7 +72,7 @@ export const Carrito = () => {
             </div>
             <Link to="/tienda" className="btn btn-naranja">Volver a la Tienda</Link>
           </div>
-        </section>
+        </motion.section>
       )}
       {carrito.length > 0 && (
         <section className="container">
@@ -83,8 +87,15 @@ export const Carrito = () => {
               </button>
             </div>
             <div className="row g-4">
+              <AnimatePresence>
               {carrito.map((articulo, index) => (
-                <div className="col-md-4" key={index}>
+                <motion.div className="col-md-4" key={articulo._id}
+                layout
+                initial={{opacity: 0, y: -30}}
+                animate={{opacity: 1, y: 0}}
+                exit={{scale: 0.1, opacity: 0}}
+                transition={{duration: 0.2, ease: "easeInOut", delay: index * 0.1}}
+                >
                   <div className="card h-100 p-3">
                     <div className="d-flex align-items-center">
                       <img
@@ -140,8 +151,9 @@ export const Carrito = () => {
                       Eliminar
                     </button>
                   </div>
-                </div>
+                </motion.div>
               ))}
+              </AnimatePresence>
             </div>
           </div>
           <div className="card p-4 mx-auto" style={{ maxWidth: "400px" }}>

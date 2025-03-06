@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './../css/Tienda.css'
 import useAuthStore from '../store/authStore';
 import  useCartStore from '../store/cartStore';
+import { motion } from "framer-motion";
 
 export const Tienda = () => {
   const token = useAuthStore.getState().token;
@@ -52,8 +53,11 @@ export const Tienda = () => {
 
           {articulos.map((articulo, index) => {
             return (
-              <div className="col-md-4" key={index}>
-                <div className="card p-3 h-100">
+              <div className="col-md-4" key={articulo._id}>
+                <motion.div className="card p-3 h-100"
+                initial={{opacity: 0,scale:0.1}}
+                transition={{duration: 0.2, ease: "easeInOut", delay: index * 0.2}}
+                animate={{opacity: 1, scale:1}}>
                   <img
                     src={'http://localhost:5000/uploads/imgProductos/' + articulo.imagen}
                     alt={articulo.nombre}
@@ -64,20 +68,20 @@ export const Tienda = () => {
                   <button
                     className="btn btn-outline-dark mt-auto"
                     data-bs-toggle="modal"
-                    data-bs-target={`#articleModal${index}`}
+                    data-bs-target={`#articleModal${articulo._id}`}
                   >
                     Ver Más Detalles
                   </button>
                   <button className='btn btn-naranja mt-2' onClick={() =>manejarAnhadirAlCarrito(articulo)}> 
                     <i className="fa-solid fa-cart-shopping">Añadir al Carrito</i>
                   </button>
-                </div>
+                </motion.div>
 
-                <div className="modal fade" id={`articleModal${index}`} tabIndex="-1" aria-labelledby={`articleModalLabel${index}`} aria-hidden="true">
+                <div className="modal fade" id={`articleModal${articulo._id}`} tabIndex="-1" aria-labelledby={`articleModalLabel${articulo._id}`} aria-hidden="true">
                   <div className="modal-dialog modal-lg">
                     <div className="modal-content">
                       <div className="modal-header">
-                        <h5 className="modal-title" id={`articleModalLabel${index}`}>{articulo.nombre}</h5>
+                        <h5 className="modal-title" id={`articleModalLabel${articulo._id}`}>{articulo.nombre}</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div className="modal-body">

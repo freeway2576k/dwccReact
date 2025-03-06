@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import './../css/GestionArticulos.css'
 import useAuthStore from '../store/authStore';
 import axios from 'axios';
-
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 export const GestionArticulos = () => {
   const token = useAuthStore.getState().token;
   //---------------------Donde se guarda el articulo-----------------------------//
@@ -237,8 +238,12 @@ export const GestionArticulos = () => {
 
 
   return (
-    <main className="d-flex flex-column py-5">
+    <motion.main className="d-flex flex-column py-5"
+    initial={{x: 3000}}
+    animate={{x: 0}}
+    transition={{ duration: 0.3, ease: "easeInOut"}}>
       <section className="container">
+      <Link to={"/panel-gestion"}><i className="bi bi-arrow-left-circle-fill text-naranja fs-1"></i></Link>
         <div className="hero3 mb-5">
           <h1>Gestión de Artículos</h1>
           <p>Administra el inventario de máquinas de tu gimnasio.</p>
@@ -424,6 +429,6 @@ export const GestionArticulos = () => {
           </div>
         </div>
       </section>
-    </main>
+    </motion.main>
   )
 }

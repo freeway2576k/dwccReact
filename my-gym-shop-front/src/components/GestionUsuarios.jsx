@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import "./../css/GestionUsuarios.css";
 import useAuthStore from '../store/authStore';
-
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export const GestionUsuarios = () => {
   const token = useAuthStore.getState().token;
@@ -147,12 +148,15 @@ export const GestionUsuarios = () => {
   //-----------------------------------------------------------------//
 
   return (
-    <main className="d-flex flex-column py-5">
+    <motion.main className="d-flex flex-column py-5"
+    initial={{x: 3000}}
+    animate={{x: 0}}
+    transition={{ type: "spring", stiffness: 100, damping: 20}}>
       <section className="container">
+      <Link to={"/panel-gestion"}><i className="bi bi-arrow-left-circle-fill text-naranja fs-1"></i></Link>
         <div className="hero2 mb-5">
           <h1>Gestión de Usuarios</h1>
         </div>
-
         <div className="card p-4 mb-5">
           <h2 className="section-title mb-4">Agregar/Modificar Usuario</h2>
           <form>
@@ -284,6 +288,6 @@ export const GestionUsuarios = () => {
           </div>
         </div>
       </section>
-    </main>
+    </motion.main>
   );
 };
